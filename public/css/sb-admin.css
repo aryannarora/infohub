@@ -10,6 +10,18 @@ html {
 body {
   overflow-x: hidden; }
 
+
+  @media only screen and (min-width:992px) {
+    .w-lg-150{
+      width: 150% !important;
+    }
+}
+
+.height-limit{
+  height: 3em !important;
+  overflow: auto; 
+}
+
 body.sticky-footer {
   margin-bottom: 56px; }
   body.sticky-footer .content-wrapper {

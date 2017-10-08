@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>Login</title>
   <!-- Bootstrap core CSS-->
   <!-- bower:css -->
-  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="lib/datatables.net-bs4/css/dataTables.bootstrap4.css" />
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/lib/datatables.net-bs4/css/dataTables.bootstrap4.css" />
   <!-- endbower -->
   <!-- inject:css -->
   <link rel="stylesheet" href="/css/sb-admin.css">
@@ -25,12 +25,12 @@
   <!-- endinject -->
   
     <!-- bower:js -->
-    <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/popper.js/dist/umd/popper.js"></script>
-    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="lib/jquery.easing/js/jquery.easing.js"></script>
-    <script src="lib/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/popper.js/dist/umd/popper.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
+    <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
     <!-- endbower -->
   </head>
 
@@ -54,7 +54,8 @@
                 <input class="form-check-input" type="checkbox"> Remember Password</label>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="/user/id">Login</a>
+          <%var id=1%>
+          <a class="btn btn-primary btn-block" href="/user/<%=id%>">Login</a>
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="register.html">Register an Account</a>

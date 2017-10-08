@@ -8,35 +8,30 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Student login</title>
+   <!-- Bootstrap core CSS-->
   <!-- bower:css -->
   <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
   <link rel="stylesheet" href="/lib/datatables.net-bs4/css/dataTables.bootstrap4.css" />
   <!-- endbower -->
   <!-- inject:css -->
-  
+  <link rel="stylesheet" href="/css/sb-admin.css">
   <link rel="stylesheet" href="/css/sb-admin.min.css">
-  
   <!-- endinject -->
   <!-- inject:js -->
-  
   <script src="/js/app.js"></script>
-  
   <script src="/js/sb-admin-charts.js"></script>
-  
   <script src="/js/sb-admin.js"></script>
-  
   <!-- endinject -->
   
     <!-- bower:js -->
-    <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/popper.js/dist/umd/popper.js"></script>
-    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="lib/jquery.easing/js/jquery.easing.js"></script>
-    <script src="lib/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/popper.js/dist/umd/popper.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
+    <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
     <!-- endbower -->
-  
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -255,16 +250,17 @@
       <hr>
       <!-- Icon Cards-->
       <div class="row">
+        <% for(var i=0;i<mentors.length;i++) {%>
         <div class=" col-6 col-lg-3 mb-3">
           <div class="card card-outline-primary  o-hidden">
             <img src="http://www.gstatic.com/webp/gallery/2.jpg" class="card-img-top" height="150">
             <div class="card-block p-2">
-              <h5 class="card-title text-center "><u>Hermoine Gringer</u></h5>
+              <h5 class="card-title text-center "><u><%=mentors[i].name%></u></h5>
 
-              <h6 class="card-text text-center">CSE | 4th Year</h6>
-              <hr class="my-0">
-              <p class="lead"><span class="badge text-primary">Angular</span><span class="badge text-primary">Node</span></p>
-
+              <h6 class="card-text text-center"><%=mentors[i].branch%> | <%=mentors[i].year%></h6>
+              <hr class="my-0"><div class="height-limit text-center">
+              <p class="lead"><% for(var j=0;j<2 && j<mentors[i].experience.length;j++) {%><span class="badge text-primary"><%=mentors[i].experience[j]%></span><%}%></p>
+</div>
 
             </div>
             <div class="bg-danger my-auto text-center ">
@@ -275,26 +271,8 @@
           </div>
           </div>
         </div>
-        <div class=" col-6 col-lg-3 mb-3">
-          <div class="card card-outline-primary  o-hidden">
-            <img src="http://www.gstatic.com/webp/gallery/2.jpg" class="card-img-top" height="150">
-            <div class="card-block p-2">
-              <h5 class="card-title text-center "><u>Hermoine Gringer</u></h5>
-
-              <h6 class="card-text text-center">CSE | 4th Year</h6>
-              <hr class="my-0">
-              <p class="lead"><span class="badge text-primary">Angular |</span><span class="badge text-primary">Node |</span><span class="badge text-primary">Django |</span></p>
-
-
-            </div>
-            <div class="bg-danger my-auto text-center ">
-            <a class="card-footer clearfix text-white d-flex align-self-center" href="#">
-              <span class="float-left mx-auto">Click to chat!</span>
-
-            </a>
-          </div>
-          </div>
-        </div>
+      <%}%>
+   
 
       </div>
     </div>
