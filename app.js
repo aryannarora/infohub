@@ -1,16 +1,47 @@
 var express=require('express');
-
+var userrouter= express.Router();
 var app=express();
-app.use(express.static('public'));
-app.use(express.static('src/views'));
+var port=process.env.PORT || 5000;
 
-var port=5000;
-app.get('/',function(req,res){
-	res.send('hello world');
+
+app.use(express.static('public'));
+app.set('views', './src/views');
+app.use('/user', userrouter);
+app.set('view engine', 'ejs');
+
+app.get('/',function(req,res)
+	{
+		res.send('Welcome page will be here');
+	});
+
+
+userrouter.route('/')
+	.get(function(req,res){
+	res.render('login');
 });
-app.get('/books',function(req,res){
-	res.send('hello wbooksd');
+
+userrouter.route('/id')
+		.get(function(req,res){
+		res.render('cards');
 });
+
+userrouter.route('/id/mentors_all')
+		.get(function(req,res){
+		res.render('mentors_all');
+});
+
+
+
+
+
+
+
+
+	/*	userrouter.route('/:id')
+    .get(function (req, res) {
+        var id = req.params.id;
+        res.render('cards');
+    }); */
 app.listen(port,function(err){
 	console.log('system runnin on Port: ',port );
 });
