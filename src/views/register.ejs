@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>SB Admin - Start Bootstrap Template</title>
+
+ <!-- Bootstrap core CSS-->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/lib/datatables.net-bs4/css/dataTables.bootstrap4.css" />
+  <!-- endbower -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/css/sb-admin.css">
+  <link rel="stylesheet" href="/css/sb-admin.min.css">
+  <!-- endinject -->
+  
+  
+    <!-- bower:js -->
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/popper.js/dist/umd/popper.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
+    <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+    <!-- endbower -->
+    <!-- inject:js -->
+  <script src="/js/app.js"></script>
+  <script src="/js/sb-admin-charts.js"></script>
+  <script src="/js/sb-admin.js"></script>
+  <!-- endinject -->
+</head>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Register an Account</div>
+      <div class="card-body">
+        <form name="registerform" action="/auth/signup" method="POST">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputName">First name</label>
+                <input class="form-control" name="fname" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputLastName">Last name</label>
+                <input class="form-control" id="exampleInputLastName" type="text" name="lname"aria-describedby="nameHelp" placeholder="Enter last name" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input class="form-control" name="email" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+
+           <% if (success) { %> <div><span class="text-danger">Email id already exists in our database.</span>
+          </div><% } %>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="Password">Password</label>
+                <input class="form-control" id="Password" name="password" type="password" placeholder="Password">
+              </div>
+              <div class="col-md-6">
+                <label for="CPassword">Confirm password</label>
+                <input class="form-control" id="CPassword" name="cpassword" type="password" placeholder="Confirm password">
+                <div id="message"></div>
+              </div>
+            </div>
+          </div>
+          <input type="submit" id="reg" value="Register" disabled="false">
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="login.html">Login Page</a>
+          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+  $('#Password, #CPassword').on('keyup', function () {
+  if ($('#Password').val() == $('#CPassword').val()) {
+    $('#message').html('');
+    $('#reg').removeAttr('disabled');
+  } else 
+    $('#message').html('Passwords must match!').css('color', 'red');
+});
+  </script>
+ 
+</body>
+
+</html>
