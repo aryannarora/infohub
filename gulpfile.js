@@ -17,6 +17,9 @@ gulp.task('style',function(){
 			
 });
 
+
+
+
 gulp.task('inject',function(){
 	var wiredep =  require('wiredep').stream;
 	var options={
@@ -31,7 +34,7 @@ gulp.task('inject',function(){
         read: false
     });
 
-    var injectOptions = {
+    var injectOptions = {   
         ignorePath: '/public'
     };
 	return gulp.src('./src/views/*.html')
