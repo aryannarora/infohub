@@ -223,11 +223,12 @@ app.get('/',function(req,res)
                 'mongodb://localhost:27017/infohub_mentors';
             mongodb.connect(url, function (err, db) {
                 var collection = db.collection('users');
+                var name=req.body.fname+' '+req.body.lname;
                 var user = {
                     _id: req.body.email,
                     password: req.body.password,
-                    fname: req.body.fname,
-                    lname: req.body.lname
+                    name: name,
+                    email:req.body.email
                 };
                 collection.findOne({
                 	_id: user._id
