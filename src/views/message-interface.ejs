@@ -234,7 +234,7 @@ chat.on('connect',function(){
 
 
   console.log('chat id is: '+ chat.id);
-  chat.emit('add-user',chat.id,from);
+  chat.emit('add-user',chat.id,from,to);
 
 });
 
@@ -261,7 +261,8 @@ $('#send').click(function(event){
     if(!message.isEmpty())
     { 
       var temp={
-        to:to
+        to:to,
+        from:from
       }
 
                   $.ajax({

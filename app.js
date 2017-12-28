@@ -26,9 +26,10 @@ var authRouter = express.Router();
 
 io.on('connection', function(socket){
 
-  socket.on('add-user',function(id,email){
-    usertosocket.add(email,id);
-    sockettouser.add(id,email);
+  socket.on('add-user',function(id,from,to){
+    var hash=crypto.createHash('md5').update(from+to).digest('hex');
+    usertosocket.add(hash,id);
+    sockettouser.add(id,hash);
     console.log(usertosocket.toObject());
     console.log(sockettouser.toObject());
     
@@ -36,7 +37,7 @@ io.on('connection', function(socket){
 
 
 app.post('/getsocketid',function(req,res){
-  var rid=sockettouser.get(req.body.to);
+  var rid=sockettouser.get(crypto.createHash('md5').update(req.body.to+req.body.from).digest('hex'));
   res.send(rid);
   console.log("rid is "+rid);
 })
@@ -209,7 +210,8 @@ app.set('view engine', 'ejs');
 
 app.get('/',function(req,res)
 	{
-		res.send('Welcome to infohub_mentors');
+		res.redirect('/login');
+
 	});
  
  authRouter.route('/signup')
@@ -260,7 +262,7 @@ app.get('/',function(req,res)
             failureRedirect: '/login'
         }), function (req, res) {
 
-        	if(req.user.mentor) return res.redirect('/mentors/dashboard');
+        	if(req.user.mentor) return res.redirect('/mentors/dashboard/messages');
 
 
         	//name=' '+req.user.fname +' '+ req.user.lname;
@@ -306,11 +308,19 @@ mentorRouter.route('/dashboard/messages/chat/:id')
       name:req.user.name
     });
 });
+     userrouter.route('/dashboard/messages')
+    .get(function(req,res){
+    
+    res.render('messages',{
+      id:req.user._id,
+      name:req.user.name
+    });
+});
 
 app.get('/mlogin',function(req,res)
 {
 	if(req.user){
-		if(req.user.mentor) return res.redirect('/mentors/dashboard');
+		if(req.user.mentor) return res.redirect('/mentors/dashboard/messages');
 		return res.redirect('/user/dashboard');
 }
 res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
@@ -335,7 +345,7 @@ app.get('/registration/')
 
 app.get('/login',function(req,res){
 	if(req.user)
-	{	if(req.user.mentor) return res.redirect('mentors/dashboard');
+	{	if(req.user.mentor) return res.redirect('mentors/dashboard/messages');
 		return res.redirect('user/dashboard');
 	}
 	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
@@ -346,7 +356,7 @@ app.get('/login',function(req,res){
 });
 app.get('/registration',function(req,res){
 	if(req.user)
-	{	if(req.user.mentor) return res.redirect('mentors/dashboard');
+	{	if(req.user.mentor) return res.redirect('mentors/dashboard/messages');
 		return res.redirect('user/dashboard');
 	}
 	var failed=req.query.success;
@@ -366,7 +376,7 @@ app.get('/registration',function(req,res){
 		
 	}
 	if(req.user.mentor){
-		return res.redirect('/mentors/dashboard');
+		return res.redirect('/mentors/dashboard/messages');
 	}
 
 	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
