@@ -291,8 +291,13 @@ $('#send').click(function(event){
   type: "POST",
   url: "/addmessage",
   data: info,
-  dataType:"json"
+  dataType:"json",
+  success:function(){
+    console.log("added");
+    chat.emit('do-it');
+  }
 });
+
       
     }
 return false;

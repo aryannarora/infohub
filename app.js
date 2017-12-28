@@ -34,6 +34,12 @@ io.on('connection', function(socket){
     console.log(sockettouser.toObject());
     
   });
+  socket.on('do-it',function(){
+    var data=true;
+                         io.emit('refresh',data);
+                      console.log('emitting...');
+
+                      })
 
 
 app.post('/getsocketid',function(req,res){
@@ -123,6 +129,7 @@ app.post('/getmessages',function(req,res){
                 collection.aggregate([
                     {$match:  {
                       "recipient":req.body.recipient,
+                      
                     }},{$group: {
                       _id: {sender:"$sender"}
                     }}] ).toArray(
@@ -177,6 +184,8 @@ app.post('/addmessage',function(req,res){
                             if(err) res.send(false);
                             else res.send(true);
                     });
+                     var waste=true;
+                    
           
     
 });

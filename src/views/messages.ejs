@@ -39,7 +39,8 @@
 
   function getmessages(){
       var thisuser=$("#thisuser").text();
-      console.log(thisuser);
+     // console.log(thisuser);
+      
   
   var x={
     recipient:thisuser
@@ -49,26 +50,29 @@
   url: "/getchats",
   data: x,
   success: function(result){   
+    $("#chat").empty();
 
-      for(i=0;i<15&&i<result.length;i++)
+      for(i=0;i<result.length;i++)
       {
         info={
           mail:result[i]._id.sender
         }
-        console.log(info.mail);
+        console.log('resut is ' + JSON.stringify(result));
          $.ajax({
             async:false,
             type: "POST",
             url: "/getname",
             data: info,
-          success: function(name){ console.log(name);
+          success: function(name){ //console.log(name);
               $("#chat").append('<div class="col-sm-12 mb-3"><div class="card o-hidden border-0"><div class="card-body p-2"><div class="media"> <img src="http://www.gstatic.com/webp/gallery/2.jpg" class="rounded-circle d-flex" height="65" width="65"><div class="media-body ml-3 my-auto"><h6 class="mt-0 mb-1"><a href="/mentors/dashboard/messages/chat/'+info.mail+'">'+name+'</a></h6>Click to chat!<span class="float-right align-self-center d-flex"><i class="fa fa-angle-right"></i></span></div><div></div></div></div></div><hr class="my-0"></div>');
               
             }
           });
+          
       }
   }
 });
+     
   };
 
 </script>
@@ -188,5 +192,20 @@
 
 
 </body>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+  var socket=io.connect('/');
+ 
+  socket.on('connect',function(){
+    console.log("connected");
+    socket.on('refresh',function(data){
+      //$("#chat").empty();
+      getmessages();
+      
+      console.log("called");
+    });
+  }); 
+  
+</script>
 
 </html>
