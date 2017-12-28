@@ -6,6 +6,7 @@ Functional Requirements:
 1. Register and login with an email id.
 2. Browse all the available mentors.
 3. Instantly chat with the online mentors.
+4. See which mentor is online.
 
 Non-functional requiremnets:
 1. Provides local authentication.
