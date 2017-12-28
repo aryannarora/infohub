@@ -33,6 +33,11 @@
     <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
     <!-- endbower -->
 </head>
+<style type="text/css">
+  .card-block{
+    transition-delay: 0.2s
+  }
+</style>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   
@@ -105,7 +110,7 @@
         <div class=" col-6 col-lg-3 mb-3">
           <div class="card card-outline-primary  o-hidden">
             <img src="http://www.gstatic.com/webp/gallery/2.jpg" class="card-img-top" height="150">
-            <div class="card-block p-2">
+            <div class="card-block p-2"  id="<%=mentors[i]._id%>" >
               <h5 class="card-title text-center "><u><%=mentors[i].name%></u></h5>
 
               <h6 class="card-text text-center"><%=mentors[i].branch%> | <%=mentors[i].year%></h6>
@@ -163,5 +168,26 @@
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
  
 </body>
+
+<script type="text/javascript">
+  
+  setInterval(function() {
+   
+    $(".card-block").css({background:"white",transition : '0.5 2s ease-in-out'});
+    console.log("actively invoking");
+   $.ajax({
+  type: "POST",
+  url: "/getonlineusers",
+  success:function(data){
+    console.log(data);
+    for (var [key, value] of data)
+    {
+      document.getElementById(''+value+'').style.background="chartreuse";
+    }
+
+  }
+});
+}, 1000 * 60 * 0.1);
+</script>
 
 </html>

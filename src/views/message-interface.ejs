@@ -228,9 +228,12 @@
     recipient:to
    }
 
-        
+        var y={
+          from:from
+        }
 
 chat.on('connect',function(){
+  chat.emit('online',from);
 
 
   console.log('chat id is: '+ chat.id);

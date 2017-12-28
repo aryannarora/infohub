@@ -213,9 +213,11 @@
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
   var socket=io.connect('/');
- 
-  socket.on('connect',function(){
+ var from=$("#thisuser").text();
+   socket.on('connect',function(){
+
     console.log("connected");
+  socket.emit("online",from);
     socket.on('refresh',function(data){
       //$("#chat").empty();
       getmessages();

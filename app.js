@@ -21,6 +21,10 @@ server.listen(port,function(err){
 var sockettouser= new Map();
 var usertosocket=new Map();
 var authRouter = express.Router();
+
+var FastSet = require("collections/fast-set");
+var fset=new FastSet();
+ var onlineusers=new Map();
 //var authRouter = require('./src/routes/authRoutes');
 
 
@@ -34,6 +38,11 @@ io.on('connection', function(socket){
     console.log(sockettouser.toObject());
     
   });
+
+  socket.on('online',function(data){
+    console.log(data+" see here");
+    onlineusers.add(data,socket.id);
+  })
   socket.on('do-it',function(){
     var data=true;
                          io.emit('refresh',data);
@@ -57,6 +66,8 @@ app.post('/getsocketid',function(req,res){
     usertosocket.delete(socket.id);
     console.log('email is this'+email);
     sockettouser.delete(email);
+    onlineusers.delete(socket.id);
+    
 
   })
 
@@ -117,8 +128,7 @@ app.post('/getmessages',function(req,res){
 
 });
 
-var FastSet = require("collections/fast-set");
-var fset=new FastSet();
+
 
 app.post('/addreceived',function(req,res){
 
@@ -190,6 +200,14 @@ app.post('/addsent',function(req,res){
     
   })
 
+
+
+
+ app.post('/getonlineusers',function(req,res){
+  console.log(onlineusers.values());
+  res.send(onlineusers);
+ })
+
  app.post('/getname',function(req,res){
 console.log("getting names");
   var url ='mongodb://localhost:27017/infohub_mentors';
@@ -231,8 +249,7 @@ app.post('/addmessage',function(req,res){
                             if(err) res.send(false);
                             else res.send(true);
                     });
-                     var waste=true;
-                    
+                  
           
     
 });
