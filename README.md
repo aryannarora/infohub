@@ -13,5 +13,7 @@ Non-functional requiremnets:
 
 
 How to run:
+Install mongodb server and run on default port of 27017.
+copy the contents of "db" folder to default directory of mogodb database storage directory.
 cd to the directory and command "gulp serve".
 Open localhost:3000(or 5000 if 3000 is busy).
