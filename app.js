@@ -115,11 +115,14 @@ app.post('/getmessages',function(req,res){
 
            });
 
-})
+});
 
- app.post('/getchats',function(req,res){
-  console.log("getting chats...");
-    var url ='mongodb://localhost:27017/infohub_mentors';
+var FastSet = require("collections/fast-set");
+var fset=new FastSet();
+
+app.post('/addreceived',function(req,res){
+
+  var url ='mongodb://localhost:27017/infohub_mentors';
            mongodb.connect(url, function (err, db) {
 
                 var collection = db.collection('messages');
@@ -134,12 +137,56 @@ app.post('/getmessages',function(req,res){
                       _id: {sender:"$sender"}
                     }}] ).toArray(
                     function (err, results) {
-                        if(err) console.log("check your config.");
-                        res.send(results);
+                        for(i=0;i<results.length;i++)
+                        {
+                          fset.add(results[i]._id.sender);
+                        }
+                        res.send(true);
                     }
                 );
 
            });
+
+});
+
+app.post('/addsent',function(req,res){
+  fset.clear();
+
+  var url ='mongodb://localhost:27017/infohub_mentors';
+           mongodb.connect(url, function (err, db) {
+
+                var collection = db.collection('messages');
+                var options = {
+                                "sort": [["time","desc"]]
+                              }
+                collection.aggregate([
+                    {$match:  {
+                      "sender":req.body.recipient,
+                      
+                    }},{$group: {
+                      _id: {recipient:"$recipient"}
+                    }}] ).toArray(
+                    function (err, results) {
+                        for(i=0;i<results.length;i++)
+                        {
+                          fset.add(results[i]._id.recipient);
+                        }
+                        res.send(true);
+                    }
+                    
+
+                );
+
+           });
+           
+
+});
+
+ app.post('/getchats',function(req,res){
+  console.log("getting chats...");
+  console.log(fset.toJSON());
+  res.send(fset);
+    
     
   })
 

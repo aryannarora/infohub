@@ -45,19 +45,36 @@
   var x={
     recipient:thisuser
   };
+  $.ajax({
+    async:false,    
+  type: "POST",
+  url: "/addsent",
+  data: x,
+  success:function(){
+    console.log("done");
+  }
+});
+  $.ajax({
+    async:false,
+  type: "POST",
+  url: "/addreceived",
+  data: x
+});
     $.ajax({
   type: "POST",
   url: "/getchats",
   data: x,
   success: function(result){   
     $("#chat").empty();
-
+    console.log(result);
+    
       for(i=0;i<result.length;i++)
       {
         info={
-          mail:result[i]._id.sender
+          mail:result[i]
         }
-        console.log('resut is ' + JSON.stringify(result));
+        if(result[i]!=thisuser)
+        {
          $.ajax({
             async:false,
             type: "POST",
@@ -68,6 +85,7 @@
               
             }
           });
+       }
           
       }
   }
