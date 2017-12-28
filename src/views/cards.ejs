@@ -26,7 +26,7 @@
   <script src="/js/sb-admin-charts.js"></script> 
   <script src="/js/sb-admin.js"></script> 
   <!-- endinject -->
-  
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <!-- bower:js -->
     <script src="/lib/jquery/dist/jquery.js"></script>
     <script src="/lib/popper.js/dist/umd/popper.js"></script>
@@ -37,18 +37,18 @@
     <!-- endbower -->
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="local()">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">InfoHub</a>
-    <a class="navbar-brand  text-center text-white">Welcome<span class="text-primary"><%=name%></span></a>
+    <a class="navbar-brand  text-center text-white">Welcome <span class="text-primary"><%=name%></span></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="/user/dashboard">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
@@ -64,7 +64,7 @@
         
         
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/user/dashboard/aboutus">
            <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">About Us</span>
           </a>
@@ -79,26 +79,7 @@
       </ul>
       <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item dropdown mr-lg-4 ">
-          <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-fw fa-envelope"></i>
-            <span class="">Messages    
-              <span class="badge badge-pill badge-primary">  12 New</span>
-            </span>
-                      </a>
-          <div class="dropdown-menu w-lg-150"  aria-labelledby="messagesDropdown">
-            <h6 class="dropdown-header">New Messages:</h6>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <strong>David Miller</strong>
-              <span class="small float-right text-muted">11:21 AM</span>
-              <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
-            </a>
-            
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item small" href="#">View all messages</a>
-          </div>
-        </li>
+      
         
       
         <li class="nav-item">
@@ -145,7 +126,7 @@
               </div>
               <div class="mr-5">CSE</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="dashboard/mentors_cse">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -161,7 +142,7 @@
               </div>
               <div class="mr-5">I.T</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="dashboard/mentors_it">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -177,7 +158,7 @@
               </div>
               <div class="mr-5">ECE</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="dashboard/mentors_ece">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -193,7 +174,7 @@
               </div>
               <div class="mr-5">EEE</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="dashboard/mentors_eee">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -208,7 +189,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
+          <small>InfoHub</small>
         </div>
       </div>
     </footer>
@@ -229,13 +210,24 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="/logout">Logout</a>
+            <a class="btn btn-primary" href="/logout" onclick="prevent()">Logout</a>
           </div>
         </div>
       </div>
     </div>
    
   </div>
+  <div id="email" style="display: none"><%=email%></div>
+ 
+<script type="text/javascript">
+/*  var socket=io.connect('/');
+  var id=$('#email').text();
+  socket.on('connect',function(){
+    socket.emit('user',id);
+  }); */
+  
+</script>
+
 </body>
 
 </html>

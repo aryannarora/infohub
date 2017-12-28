@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+<!-- Bootstrap core CSS-->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/lib/datatables.net-bs4/css/dataTables.bootstrap4.css" />
+  <!-- endbower -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/css/sb-admin.css">
+  <link rel="stylesheet" href="/css/sb-admin.min.css">
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="/js/app.js"></script>
+  <script src="/js/sb-admin-charts.js"></script>
+  <script src="/js/sb-admin.js"></script>
+  
+  <!-- endinject -->
+  
+    <!-- bower:js -->
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/popper.js/dist/umd/popper.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
+    <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+    <!-- endbower -->
+   
+</head>
+<script type="text/javascript">
+    function getmessages(){
+
+      var from=$("#from").text();
+   var to=$("#email").text();
+        var x={
+    sender:from,
+    recepient:to
+   }
+   console.log(x);
+
+
+     $.ajax({
+  type: "POST",
+  url: "/calchash",
+  data: x,
+  success: function(result){
+    mid={
+      hash1:result.hash1,
+      hash2:result.hash2
+    }
+    console.log("mid is " + mid.hash1);
+
+            $.ajax({
+          type: "POST",
+          url: "/getmessages",
+          data: mid,
+          success:function(data){
+            console.log(data);
+           
+            for(i=0;i<data.length && i<10;i++)
+            {
+              if(data[i].sender==from)
+              {
+                 $('.chat').prepend('<li class="right clearfix"><span class="chat-img pull-right"><img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>'+data[i].time+'</small><strong class="pull-right primary-font"></strong>  </div> <p>'+data[i].content+'</p></div></li>');
+
+              }
+              else
+              {
+                 $('.chat').prepend('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"> <strong class="primary-font"></strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>'+data[i].time+'</small></div><p>'+data[i].content+'</p></div></li>');
+
+              }
+            }
+
+          }
+        });
+    }
+  });
+};
+   
+</script>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="getmessages()">
+  <!-- Navigation-->
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">InfoHub</a>
+   
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="/user/dashboard">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="/user/dashboard/messages/">
+            <i class="fa fa-fw fa-envelope"></i>
+            <span class="nav-link-text">Message Box</span>
+          </a>
+        </li>
+        
+       
+        
+        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+          <a class="nav-link" href="/user/dashboard/aboutus">
+           <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">About Us</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+
+      
+        
+      
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper p-0">
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="accordion">
+                    <span class="glyphicon glyphicon-comment"></span> <span class="lead"><strong><%=mentor.name%>'s Chat</strong></span>
+                    <hr>
+                    
+                </div>
+            <div class="" id="collapseOne">
+                <div class="panel-body">
+                    <ul class="chat">
+                        
+                        
+                            
+                                    
+                        
+                       
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <from class="input-group">
+                        <input required id="msg" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-md" id="send" type="submit">
+                                Send</button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>InfoHub</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="/logout">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<div id="email" style="display: none"><%=mentor.email%></div>
+<div id="from" style="display: none"><%=mail%></div>
+
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+
+
+ <script type="text/javascript">
+  $(function(){
+
+    var chat=io.connect('/');
+   var from=$("#from").text();
+   var to=$("#email").text();
+   var mid;
+   var x={
+    sender:from,
+    recipient:to
+   }
+
+        
+
+chat.on('connect',function(){
+
+
+  console.log('chat id is: '+ chat.id);
+  chat.emit('add-user',chat.id,from);
+
+});
+
+
+
+
+$('#send').click(function(event){
+  event.stopImmediatePropagation();
+    var message=$('#msg').val();
+    
+    var time=new Date();
+
+    var info={
+      sender:from,
+      recepient:to,
+      content:message,
+      time: time,
+      
+    };
+    String.prototype.isEmpty = function() {
+    return (this.length === 0 || !this.trim());
+};
+    
+    if(!message.isEmpty())
+    { 
+      var temp={
+        to:to
+      }
+
+                  $.ajax({
+
+            type: "POST",
+            url: "/getsocketid",
+            data: temp,
+            success: function(rid){
+              console.log("hii " +rid);
+              chat.emit('send-message',rid,info);
+
+            }
+          });
+      /*chat.emit('getsocketid',to);*/
+    /*  chat.on('socketid',function(rid)
+      {
+
+        chat.emit('send-message',rid,message);
+     
+      });
+*/         
+        $('#msg').val("");
+        $('.chat').append('<li class="right clearfix"><span class="chat-img pull-right"><img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>'+info.time.toTimeString()+'</small><strong class="pull-right primary-font"></strong>  </div> <p>'+message+'</p></div></li>');
+
+      $.ajax({
+  type: "POST",
+  url: "/addmessage",
+  data: info,
+  dataType:"json"
+});
+      
+    }
+return false;
+
+  });
+
+  chat.on('message',function(msg)
+  {     var myDate=new Date(msg.time);
+    $('.chat').append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"> <strong class="primary-font"></strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>'+myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds()+'</small></div><p>'+msg.content+'</p></div></li>');
+
+  })
+
+ 
+})
+  </script>
+
+</body>
+
+</html>

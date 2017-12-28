@@ -12,7 +12,10 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
+    "browser-cookies": "^1.1.0",
+    "collections": "^5.1.1",
     "cookie-parser": "^1.4.3",
+    "crypto": "^1.0.1",
     "ejs": "^2.5.7",
     "express": "^4.15.5",
     "express-session": "^1.15.6",
@@ -22,7 +25,8 @@
     "jsdom": "^11.3.0",
     "mongodb": "^2.2.31",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

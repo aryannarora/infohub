@@ -36,7 +36,7 @@
   <!-- endinject -->
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark" onload=check()>
   <div class="container">
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
@@ -76,8 +76,9 @@
           <input type="submit" id="reg" value="Register" disabled="false">
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="login.html">Login Page</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <a class="d-block small mt-3" href="/login">Login</a>
+          <a class="d-block small mt-3" href="/mlogin">Mentor Login</a>
+          
         </div>
       </div>
     </div>
@@ -90,6 +91,7 @@
   } else 
     $('#message').html('Passwords must match!').css('color', 'red');
 });
+
   </script>
  
 </body>
