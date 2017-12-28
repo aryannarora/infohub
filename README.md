@@ -10,3 +10,8 @@ Functional Requirements:
 Non-functional requiremnets:
 1. Provides local authentication.
 2. Optimized for fast performance.
+
+
+How to run:
+cd to the directory and command "gulp serve".
+Open localhost:3000(or 5000 if 3000 is busy).
