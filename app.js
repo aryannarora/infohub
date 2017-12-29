@@ -29,6 +29,7 @@ var fset=new FastSet();
 
 
 io.on('connection', function(socket){
+  
 
   socket.on('add-user',function(id,from,to){
     var hash=crypto.createHash('md5').update(from+to).digest('hex');
@@ -42,6 +43,7 @@ io.on('connection', function(socket){
   socket.on('online',function(data){
     console.log(data+" see here");
     onlineusers.add(data,socket.id);
+    io.emit('onlineusers',onlineusers);
   })
   socket.on('do-it',function(){
     var data=true;
@@ -67,8 +69,12 @@ app.post('/getsocketid',function(req,res){
     console.log('email is this'+email);
     sockettouser.delete(email);
     onlineusers.delete(socket.id);
+    io.emit('onlineusers',onlineusers);
     
 
+  })
+  socket.on('getonlineusers',function(){
+    socket.emit('onlineusers',onlineusers);
   })
 
   socket.on('send-message', function(id, msg){
@@ -203,10 +209,10 @@ app.post('/addsent',function(req,res){
 
 
 
- app.post('/getonlineusers',function(req,res){
+/* app.post('/getonlineusers',function(req,res){
   console.log(onlineusers.values());
   res.send(onlineusers);
- })
+ })*/
 
  app.post('/getname',function(req,res){
 console.log("getting names");

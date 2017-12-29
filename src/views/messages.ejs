@@ -218,6 +218,7 @@
 
     console.log("connected");
   socket.emit("online",from);
+  
     socket.on('refresh',function(data){
       //$("#chat").empty();
       getmessages();

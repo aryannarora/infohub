@@ -35,7 +35,7 @@
 </head>
 <style type="text/css">
   .card-block{
-    transition-delay: 0.2s
+    transition-delay: 2s
   }
 </style>
 
@@ -166,10 +166,25 @@
     
   </div>
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript">
+    var socket=io.connect('/');
+    socket.on('connect',function(){
+      socket.emit('getonlineusers');
+      socket.on('onlineusers',function(data){
+        console.log(data);
+        $(".card-block").css({background:"white"});
+
+                  for (var [key, value] of data)
+              {
+                document.getElementById(''+value+'').style.background="chartreuse";
+              }
+      })
+    })
+  </script>
  
 </body>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   
   setInterval(function() {
    
@@ -188,6 +203,6 @@
   }
 });
 }, 1000 * 60 * 0.1);
-</script>
+</script> -->
 
 </html>
