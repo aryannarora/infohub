@@ -15,34 +15,39 @@
   <link rel="stylesheet" href="/lib/datatables.net-bs4/css/dataTables.bootstrap4.css" />
   <!-- endbower -->
   <!-- inject:css -->
-  
+
   <link rel="stylesheet" href="/css/sb-admin.css">
-  
+
   <link rel="stylesheet" href="/css/sb-admin.min.css">
-  
+
   <!-- endinject -->
-  <!-- inject:js --> 
-  <script src="/js/app.js"></script> 
-  <script src="/js/sb-admin-charts.js"></script> 
-  <script src="/js/sb-admin.js"></script> 
+  <!-- inject:js -->
+  <script src="/js/app.js"></script>
+  <script src="/js/sb-admin-charts.js"></script>
+  <script src="/js/sb-admin.js"></script>
   <!-- endinject -->
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <!-- bower:js -->
-    <script src="/lib/jquery/dist/jquery.js"></script>
-    <script src="/lib/popper.js/dist/umd/popper.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
-    <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
-    <!-- endbower -->
+  <!-- bower:js -->
+  <script src="/lib/jquery/dist/jquery.js"></script>
+  <script src="/lib/popper.js/dist/umd/popper.js"></script>
+  <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
+  <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
+  <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+  <!-- endbower -->
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="local()">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">InfoHub</a>
-    <a class="navbar-brand  text-center text-white">Welcome <span class="text-primary"><%=name%></span></a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand  text-center text-white">Welcome
+      <span class="text-primary">
+        <%=name%>
+      </span>
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -59,13 +64,13 @@
             <span class="nav-link-text">Message Box</span>
           </a>
         </li>
-        
-       
-        
-        
+
+
+
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
           <a class="nav-link" href="/user/dashboard/aboutus">
-           <i class="fa fa-fw fa-file"></i>
+            <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">About Us</span>
           </a>
         </li>
@@ -79,9 +84,9 @@
       </ul>
       <ul class="navbar-nav ml-auto">
 
-      
-        
-      
+
+
+
         <li class="nav-item">
           <a class="nav-link" href="/logout" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -106,7 +111,7 @@
           <div class="card text-white bg-primary o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-              <!--  <i class="fa fa-fw fa-comments"></i> -->
+                <!--  <i class="fa fa-fw fa-comments"></i> -->
               </div>
               <div class="mr-5">All</div>
             </div>
@@ -122,7 +127,7 @@
           <div class="card text-white bg-warning o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-              <!--  <i class="fa fa-fw fa-list"></i> -->
+                <!--  <i class="fa fa-fw fa-list"></i> -->
               </div>
               <div class="mr-5">CSE</div>
             </div>
@@ -138,7 +143,7 @@
           <div class="card text-white bg-success o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-              <!--  <i class="fa fa-fw fa-shopping-cart"></i> -->
+                <!--  <i class="fa fa-fw fa-shopping-cart"></i> -->
               </div>
               <div class="mr-5">I.T</div>
             </div>
@@ -154,7 +159,7 @@
           <div class="card text-white bg-info o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-              <!--  <i class="fa fa-fw fa-support"></i>  -->
+                <!--  <i class="fa fa-fw fa-support"></i>  -->
               </div>
               <div class="mr-5">ECE</div>
             </div>
@@ -170,7 +175,7 @@
           <div class="card text-white bg-danger o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-              <!--  <i class="fa fa-fw fa-support"></i>  -->
+                <!--  <i class="fa fa-fw fa-support"></i>  -->
               </div>
               <div class="mr-5">EEE</div>
             </div>
@@ -215,18 +220,11 @@
         </div>
       </div>
     </div>
-   
+
   </div>
-  <div id="email" style="display: none"><%=email%></div>
- 
-<script type="text/javascript">
-/*  var socket=io.connect('/');
-  var id=$('#email').text();
-  socket.on('connect',function(){
-    socket.emit('user',id);
-  }); */
-  
-</script>
+  <div id="email" style="display: none">
+    <%=email%>
+  </div>
 
 </body>
 

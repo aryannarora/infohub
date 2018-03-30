@@ -15,95 +15,96 @@
   <link rel="stylesheet" href="/lib/datatables.net-bs4/css/dataTables.bootstrap4.css" />
   <!-- endbower -->
   <!-- inject:css -->
-  
+
   <link rel="stylesheet" href="/css/sb-admin.css">
-  
+
   <link rel="stylesheet" href="/css/sb-admin.min.css">
-  
-  <!-- endinject -->
-  <!-- inject:js --> 
-  <script src="/js/app.js"></script> 
-  <script src="/js/sb-admin-charts.js"></script> 
-  <script src="/js/sb-admin.js"></script> 
-  <!-- endinject -->
-  
-    <!-- bower:js -->
-    <script src="/lib/jquery/dist/jquery.js"></script>
-    <script src="/lib/popper.js/dist/umd/popper.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
-    <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
-    <!-- endbower -->
-    <script type="text/javascript">
 
-  function getmessages(){
-      var thisuser=$("#thisuser").text();
-     // console.log(thisuser);
-      
-  
-  var x={
-    recipient:thisuser
-  };
-  $.ajax({
-    async:false,    
-  type: "POST",
-  url: "/addsent",
-  data: x,
-  success:function(){
-    console.log("done");
-  }
-});
-  $.ajax({
-    async:false,
-  type: "POST",
-  url: "/addreceived",
-  data: x
-});
-    $.ajax({
-  type: "POST",
-  url: "/getchats",
-  data: x,
-  success: function(result){   
-    $("#chat").empty();
-    console.log(result);
-    
-      for(i=0;i<result.length;i++)
-      {
-        info={
-          mail:result[i]
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="/js/app.js"></script>
+  <script src="/js/sb-admin-charts.js"></script>
+  <script src="/js/sb-admin.js"></script>
+  <!-- endinject -->
+
+  <!-- bower:js -->
+  <script src="/lib/jquery/dist/jquery.js"></script>
+  <script src="/lib/popper.js/dist/umd/popper.js"></script>
+  <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
+  <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
+  <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+  <!-- endbower -->
+  <script type="text/javascript">
+    function getmessages() {
+      var thisuser = $("#thisuser").text();
+      // console.log(thisuser);
+
+
+      var x = {
+        recipient: thisuser
+      };
+      $.ajax({
+        async: false,
+        type: "POST",
+        url: "/addsent",
+        data: x,
+        success: function () {
+          console.log("done");
         }
-        if(result[i]!=thisuser)
-        {
-         $.ajax({
-            async:false,
-            type: "POST",
-            url: "/getname",
-            data: info,
-          success: function(name){ //console.log(name);
-              $("#chat").append('<div class="col-sm-12 mb-3"><div class="card o-hidden border-0"><div class="card-body p-2"><div class="media"> <img src="http://www.gstatic.com/webp/gallery/2.jpg" class="rounded-circle d-flex" height="65" width="65"><div class="media-body ml-3 my-auto"><h6 class="mt-0 mb-1"><a href="/mentors/dashboard/messages/chat/'+info.mail+'">'+name+'</a></h6>Click to chat!<span class="float-right align-self-center d-flex"><i class="fa fa-angle-right"></i></span></div><div></div></div></div></div><hr class="my-0"></div>');
-              
-            }
-          });
-       }
-          
-      }
-  }
-});
-     
-  };
+      });
+      $.ajax({
+        async: false,
+        type: "POST",
+        url: "/addreceived",
+        data: x
+      });
+      $.ajax({
+        type: "POST",
+        url: "/getchats",
+        data: x,
+        success: function (result) {
+          $("#chat").empty();
+          console.log(result);
 
-</script>
+          for (i = 0; i < result.length; i++) {
+            info = {
+              mail: result[i]
+            }
+            if (result[i] != thisuser) {
+              $.ajax({
+                async: false,
+                type: "POST",
+                url: "/getname",
+                data: info,
+                success: function (name) { //console.log(name);
+                  $("#chat").append(
+                    '<div class="col-sm-12 mb-3"><div class="card o-hidden border-0"><div class="card-body p-2"><div class="media"> <img src="http://www.gstatic.com/webp/gallery/2.jpg" class="rounded-circle d-flex" height="65" width="65"><div class="media-body ml-3 my-auto"><h6 class="mt-0 mb-1"><a href="/mentors/dashboard/messages/chat/' +
+                    info.mail + '">' + name +
+                    '</a></h6>Click to chat!<span class="float-right align-self-center d-flex"><i class="fa fa-angle-right"></i></span></div><div></div></div></div></div><hr class="my-0"></div>'
+                  );
+
+                }
+              });
+            }
+
+          }
+        }
+      });
+
+    };
+  </script>
 </head>
 
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="getmessages()">
   <!-- Navigation-->
-   <!-- Navigation-->
+  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">InfoHub</a>
-   
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/">InfoHub</a>
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -120,13 +121,13 @@
             <span class="nav-link-text">Message Box</span>
           </a>
         </li>
-        
-       
-        
-        
+
+
+
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-          <a class="nav-link" href="/user/dashboard/aboutus">
-           <i class="fa fa-fw fa-file"></i>
+          <a class="nav-link" href="/aboutus">
+            <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">About Us</span>
           </a>
         </li>
@@ -140,9 +141,9 @@
       </ul>
       <ul class="navbar-nav ml-auto">
 
-      
-        
-      
+
+
+
         <li class="nav-item">
           <a class="nav-link" href="/logout" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -162,71 +163,72 @@
       <h1>Messages</h1>
       <hr>
       <!-- Icon Cards-->
-       <!-- Icon Cards-->
+      <!-- Icon Cards-->
       <div class="row" id="chat">
-                
 
-        </div>
+
       </div>
-      <hr class="my-0">
     </div>
+    <hr class="my-0">
+  </div>
 
 
   </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>InfoHub</small>
-        </div>
+  <!-- /.container-fluid-->
+  <!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>InfoHub</small>
       </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="/logout">Logout</a>
-          </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="/logout">Logout</a>
         </div>
       </div>
     </div>
+  </div>
 
   </div>
-  <div id="thisuser" ><%=id%></div>
+  <div id="thisuser">
+    <%=id%>
+  </div>
 
 
 </body>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
-  var socket=io.connect('/');
- var from=$("#thisuser").text();
-   socket.on('connect',function(){
+  var socket = io.connect('/');
+  var from = $("#thisuser").text();
+  socket.on('connect', function () {
 
     console.log("connected");
-  socket.emit("online",from);
-  
-    socket.on('refresh',function(data){
+    socket.emit("online", from);
+
+    socket.on('refresh', function (data) {
       //$("#chat").empty();
       getmessages();
-      
+
       console.log("called");
     });
-  }); 
-  
+  });
 </script>
 
 </html>

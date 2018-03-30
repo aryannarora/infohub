@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-<!-- Bootstrap core CSS-->
+  <!-- Bootstrap core CSS-->
   <!-- bower:css -->
   <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
@@ -21,69 +21,69 @@
   <script src="/js/app.js"></script>
   <script src="/js/sb-admin-charts.js"></script>
   <script src="/js/sb-admin.js"></script>
-  
+
   <!-- endinject -->
-  
-    <!-- bower:js -->
-    <script src="/lib/jquery/dist/jquery.js"></script>
-    <script src="/lib/popper.js/dist/umd/popper.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
-    <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
-    <!-- endbower -->
-   
+
+  <!-- bower:js -->
+  <script src="/lib/jquery/dist/jquery.js"></script>
+  <script src="/lib/popper.js/dist/umd/popper.js"></script>
+  <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
+  <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
+  <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+  <!-- endbower -->
+
 </head>
 <script type="text/javascript">
-    function getmessages(){
+  function getmessages() {
 
-      var from=$("#from").text();
-   var to=$("#email").text();
-        var x={
-    sender:from,
-    recepient:to
-   }
-   console.log(x);
-
-
-     $.ajax({
-  type: "POST",
-  url: "/calchash",
-  data: x,
-  success: function(result){
-    mid={
-      hash1:result.hash1,
-      hash2:result.hash2
+    var from = $("#from").text();
+    var to = $("#email").text();
+    var x = {
+      sender: from,
+      recepient: to
     }
-    console.log("mid is " + mid.hash1);
+    console.log(x);
 
-            $.ajax({
+
+    $.ajax({
+      type: "POST",
+      url: "/calchash",
+      data: x,
+      success: function (result) {
+        mid = {
+          hash1: result.hash1,
+          hash2: result.hash2
+        }
+        console.log("mid is " + mid.hash1);
+
+        $.ajax({
           type: "POST",
           url: "/getmessages",
           data: mid,
-          success:function(data){
+          success: function (data) {
             console.log(data);
-           
-            for(i=0;i<data.length && i<10;i++)
-            {
-              if(data[i].sender==from)
-              {
-                 $('.chat').prepend('<li class="right clearfix"><span class="chat-img pull-right"><img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>'+data[i].time+'</small><strong class="pull-right primary-font"></strong>  </div> <p>'+data[i].content+'</p></div></li>');
 
-              }
-              else
-              {
-                 $('.chat').prepend('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"> <strong class="primary-font"></strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>'+data[i].time+'</small></div><p>'+data[i].content+'</p></div></li>');
+            for (i = 0; i < data.length && i < 10; i++) {
+              if (data[i].sender == from) {
+                $('.chat').prepend(
+                  '<li class="right clearfix"><span class="chat-img pull-right"><img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>' +
+                  data[i].time + '</small><strong class="pull-right primary-font"></strong>  </div> <p>' +
+                  data[i].content + '</p></div></li>');
+
+              } else {
+                $('.chat').prepend(
+                  '<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"> <strong class="primary-font"></strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>' +
+                  data[i].time + '</small></div><p>' + data[i].content + '</p></div></li>');
 
               }
             }
 
           }
         });
-    }
-  });
-};
-   
+      }
+    });
+  };
 </script>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="getmessages()">
@@ -91,8 +91,9 @@
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">InfoHub</a>
-   
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -109,13 +110,13 @@
             <span class="nav-link-text">Message Box</span>
           </a>
         </li>
-        
-       
-        
-        
+
+
+
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
           <a class="nav-link" href="/user/dashboard/aboutus">
-           <i class="fa fa-fw fa-file"></i>
+            <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">About Us</span>
           </a>
         </li>
@@ -129,9 +130,9 @@
       </ul>
       <ul class="navbar-nav ml-auto">
 
-      
-        
-      
+
+
+
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -140,42 +141,46 @@
     </div>
   </nav>
   <div class="content-wrapper p-0">
-  <div class="container">
-    <div class="row">
+    <div class="container">
+      <div class="row">
         <div class="col-sm-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading" id="accordion">
-                    <span class="glyphicon glyphicon-comment"></span> <span class="lead"><strong><%=mentor.name%>'s Chat</strong></span>
-                    <hr>
-                    
-                </div>
-            <div class="" id="collapseOne">
-                <div class="panel-body">
-                    <ul class="chat">
-                        
-                        
-                            
-                                    
-                        
-                       
-                    </ul>
-                </div>
-                <div class="panel-footer">
-                    <from class="input-group">
-                        <input required id="msg" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                        <span class="input-group-btn">
-                            <button class="btn btn-warning btn-md" id="send" type="submit">
-                                Send</button>
-                        </span>
-                    </form>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
+          <div class="panel panel-primary">
+            <div class="panel-heading" id="accordion">
+              <span class="glyphicon glyphicon-comment"></span>
+              <span class="lead">
+                <strong>
+                  <%=mentor.name%>'s Chat</strong>
+              </span>
+              <hr>
 
-      
+            </div>
+            <div class="" id="collapseOne">
+              <div class="panel-body">
+                <ul class="chat">
+
+
+
+
+
+
+                </ul>
+              </div>
+              <div class="panel-footer">
+                <from class="input-group">
+                  <input required id="msg" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                  <span class="input-group-btn">
+                    <button class="btn btn-warning btn-md" id="send" type="submit">
+                      Send</button>
+                  </span>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -209,112 +214,122 @@
     </div>
 
   </div>
-<div id="email" style="display: none"><%=mentor.email%></div>
-<div id="from" style="display: none"><%=mail%></div>
+  <div id="email" style="display: none">
+    <%=mentor.email%>
+  </div>
+  <div id="from" style="display: none">
+    <%=mail%>
+  </div>
 
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-
-
-
- <script type="text/javascript">
-  $(function(){
-
-    var chat=io.connect('/');
-   var from=$("#from").text();
-   var to=$("#email").text();
-   var mid;
-   var x={
-    sender:from,
-    recipient:to
-   }
-
-        var y={
-          from:from
-        }
-
-chat.on('connect',function(){
-  chat.emit('online',from);
-
-
-  console.log('chat id is: '+ chat.id);
-  chat.emit('add-user',chat.id,from,to);
-
-});
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 
 
+  <script type="text/javascript">
+    $(function () {
 
-$('#send').click(function(event){
-  event.stopImmediatePropagation();
-    var message=$('#msg').val();
-    
-    var time=new Date();
-
-    var info={
-      sender:from,
-      recepient:to,
-      content:message,
-      time: time,
-      
-    };
-    String.prototype.isEmpty = function() {
-    return (this.length === 0 || !this.trim());
-};
-    
-    if(!message.isEmpty())
-    { 
-      var temp={
-        to:to,
-        from:from
+      var chat = io.connect('/');
+      var from = $("#from").text();
+      var to = $("#email").text();
+      var mid;
+      var x = {
+        sender: from,
+        recipient: to
       }
 
-                  $.ajax({
+      var y = {
+        from: from
+      }
+
+      chat.on('connect', function () {
+        chat.emit('online', from);
+
+
+        console.log('chat id is: ' + chat.id);
+        chat.emit('add-user', chat.id, from, to);
+
+      });
+
+
+
+
+      $('#send').click(function (event) {
+        event.stopImmediatePropagation();
+        var message = $('#msg').val();
+
+        var time = new Date();
+
+        var info = {
+          sender: from,
+          recepient: to,
+          content: message,
+          time: time,
+
+        };
+        String.prototype.isEmpty = function () {
+          return (this.length === 0 || !this.trim());
+        };
+
+        if (!message.isEmpty()) {
+          var temp = {
+            to: to,
+            from: from
+          }
+
+          $.ajax({
 
             type: "POST",
             url: "/getsocketid",
             data: temp,
-            success: function(rid){
-              console.log("hii " +rid);
-              chat.emit('send-message',rid,info);
+            success: function (rid) {
+              console.log("hii " + rid);
+              chat.emit('send-message', rid, info);
 
             }
           });
-      /*chat.emit('getsocketid',to);*/
-    /*  chat.on('socketid',function(rid)
+          /*chat.emit('getsocketid',to);*/
+          /*  chat.on('socketid',function(rid)
       {
 
         chat.emit('send-message',rid,message);
      
       });
-*/         
-        $('#msg').val("");
-        $('.chat').append('<li class="right clearfix"><span class="chat-img pull-right"><img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>'+info.time.toTimeString()+'</small><strong class="pull-right primary-font"></strong>  </div> <p>'+message+'</p></div></li>');
+*/
+          $('#msg').val("");
+          $('.chat').append(
+            '<li class="right clearfix"><span class="chat-img pull-right"><img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" /> </span> <div class="chat-body clearfix"> <div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>' +
+            info.time.toTimeString() +
+            '</small><strong class="pull-right primary-font"></strong>  </div> <p>' + message +
+            '</p></div></li>');
 
-      $.ajax({
-  type: "POST",
-  url: "/addmessage",
-  data: info,
-  dataType:"json",
-  success:function(){
-    console.log("added");
-    chat.emit('do-it');
-  }
-});
+          $.ajax({
+            type: "POST",
+            url: "/addmessage",
+            data: info,
+            dataType: "json",
+            success: function () {
+              console.log("added");
+              chat.emit('do-it');
+            }
+          });
 
-      
-    }
-return false;
 
-  });
+        }
+        return false;
 
-  chat.on('message',function(msg)
-  {     var myDate=new Date(msg.time);
-    $('.chat').append('<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"> <strong class="primary-font"></strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>'+myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds()+'</small></div><p>'+msg.content+'</p></div></li>');
+      });
 
-  })
+      chat.on('message', function (msg) {
+        var myDate = new Date(msg.time);
+        $('.chat').append(
+          '<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"> <strong class="primary-font"></strong> <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>' +
+          myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds() + '</small></div><p>' +
+          msg.content + '</p></div></li>');
 
- 
-})
+      })
+
+
+    })
   </script>
 
 </body>

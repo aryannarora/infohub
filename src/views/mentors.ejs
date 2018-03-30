@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Student login</title>
-   <!-- Bootstrap core CSS-->
+  <!-- Bootstrap core CSS-->
   <!-- bower:css -->
   <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
@@ -23,30 +23,31 @@
   <script src="/js/sb-admin-charts.js"></script>
   <script src="/js/sb-admin.js"></script>
   <!-- endinject -->
-  
-    <!-- bower:js -->
-    <script src="/lib/jquery/dist/jquery.js"></script>
-    <script src="/lib/popper.js/dist/umd/popper.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
-    <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
-    <!-- endbower -->
+
+  <!-- bower:js -->
+  <script src="/lib/jquery/dist/jquery.js"></script>
+  <script src="/lib/popper.js/dist/umd/popper.js"></script>
+  <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/lib/jquery.easing/js/jquery.easing.js"></script>
+  <script src="/lib/datatables.net/js/jquery.dataTables.js"></script>
+  <script src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+  <!-- endbower -->
 </head>
 <style type="text/css">
-  .card-block{
+  .card-block {
     transition-delay: 2s
   }
 </style>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  
+
   <!-- Navigation-->
-   <!-- Navigation-->
+  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">InfoHub</a>
-   
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -63,13 +64,13 @@
             <span class="nav-link-text">Message Box</span>
           </a>
         </li>
-        
-       
-        
-        
+
+
+
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
           <a class="nav-link" href="/user/dashboard/aboutus">
-           <i class="fa fa-fw fa-file"></i>
+            <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">About Us</span>
           </a>
         </li>
@@ -83,9 +84,9 @@
       </ul>
       <ul class="navbar-nav ml-auto">
 
-      
-        
-      
+
+
+
         <li class="nav-item">
           <a class="nav-link" href="/logout" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -107,28 +108,42 @@
       <!-- Icon Cards-->
       <div class="row">
         <% for(var i=0;i<mentors.length;i++) {%>
-        <div class=" col-6 col-lg-3 mb-3">
-          <div class="card card-outline-primary  o-hidden">
-            <img src="http://www.gstatic.com/webp/gallery/2.jpg" class="card-img-top" height="150">
-            <div class="card-block p-2"  id="<%=mentors[i]._id%>" >
-              <h5 class="card-title text-center "><u><%=mentors[i].name%></u></h5>
+          <div class=" col-6 col-lg-3 mb-3">
+            <div class="card card-outline-primary  o-hidden">
+              <img src="http://www.gstatic.com/webp/gallery/2.jpg" class="card-img-top" height="150">
+              <div class="card-block p-2" id="<%=mentors[i]._id%>">
+                <h5 class="card-title text-center ">
+                  <u>
+                    <%=mentors[i].name%>
+                  </u>
+                </h5>
 
-              <h6 class="card-text text-center"><%=mentors[i].branch%> | <%=mentors[i].year%></h6>
-              <hr class="my-0"><div class="height-limit text-center">
-              <p class="lead"><% for(var j=0;j<2 && j<mentors[i].experience.length;j++) {%><span class="badge text-primary"><%=mentors[i].experience[j]%></span><%}%></p>
-</div>
+                <h6 class="card-text text-center">
+                  <%=mentors[i].branch%> |
+                    <%=mentors[i].year%>
+                </h6>
+                <hr class="my-0">
+                <div class="height-limit text-center">
+                  <p class="lead">
+                    <% for(var j=0;j<2 && j<mentors[i].experience.length;j++) {%>
+                      <span class="badge text-primary">
+                        <%=mentors[i].experience[j]%>
+                      </span>
+                      <%}%>
+                  </p>
+                </div>
 
+              </div>
+              <div class="bg-danger my-auto text-center ">
+                <a class="card-footer clearfix text-white d-flex align-self-center" href="/user/dashboard/messages/chat/<%=mentors[i]._id%>">
+                  <span class="float-left mx-auto">Click to chat!</span>
+
+                </a>
+              </div>
             </div>
-            <div class="bg-danger my-auto text-center ">
-            <a class="card-footer clearfix text-white d-flex align-self-center" href="/user/dashboard/messages/chat/<%=mentors[i]._id%>">
-              <span class="float-left mx-auto">Click to chat!</span>
+          </div>
+          <%}%>
 
-            </a>
-          </div>
-          </div>
-        </div>
-      <%}%>
-   
 
       </div>
     </div>
@@ -163,25 +178,26 @@
         </div>
       </div>
     </div>
-    
+
   </div>
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   <script type="text/javascript">
-    var socket=io.connect('/');
-    socket.on('connect',function(){
+    var socket = io.connect('/');
+    socket.on('connect', function () {
       socket.emit('getonlineusers');
-      socket.on('onlineusers',function(data){
+      socket.on('onlineusers', function (data) {
         console.log(data);
-        $(".card-block").css({background:"white"});
+        $(".card-block").css({
+          background: "white"
+        });
 
-                  for (var [key, value] of data)
-              {
-                document.getElementById(''+value+'').style.background="chartreuse";
-              }
+        for (var [key, value] of data) {
+          document.getElementById('' + value + '').style.background = "chartreuse";
+        }
       })
     })
   </script>
- 
+
 </body>
 
 <!-- <script type="text/javascript">
